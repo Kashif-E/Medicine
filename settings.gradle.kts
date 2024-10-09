@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Medicine"
 include(":app")
+include(":core")
