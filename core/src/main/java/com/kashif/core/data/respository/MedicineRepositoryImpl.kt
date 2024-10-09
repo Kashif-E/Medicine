@@ -28,7 +28,7 @@ class MedicineRepositoryImpl @Inject constructor(
            return dao.getAllMedicines()
     }
 
-    override suspend fun getMedicineById(id: Int): Medicine? {
+    override suspend fun getMedicineById(id: String): Medicine? {
         return withContext(ioDispatcher) {
             dao.getMedicineById(id)
         }

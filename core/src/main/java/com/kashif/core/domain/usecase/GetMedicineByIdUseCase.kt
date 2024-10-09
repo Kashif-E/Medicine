@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetMedicineByIdUseCase @Inject constructor(
     private val repository: IMedicineRepository
 ) {
-    suspend operator fun invoke(id: Int): Medicine? {
+    suspend operator fun invoke(id: String): Medicine? {
         return repository.getMedicineById(id)
     }
 }

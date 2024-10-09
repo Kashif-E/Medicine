@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface IUserRepository {
     suspend fun insertUser(user: User)
-    suspend fun getLoggedInUser(): Flow<User?>
+    fun getLoggedInUser(): Flow<User?>
 }

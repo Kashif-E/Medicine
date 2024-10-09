@@ -57,10 +57,14 @@ dependencies {
     api(libs.hilt.android)
     api(libs.hilt.android.gradle.plugin)
     ksp(libs.hilt.android.compiler)
+
+
     kspTest(libs.hilt.android.compiler)
     kspAndroidTest(libs.hilt.android.compiler)
-
-
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.serialization.json)
+    testImplementation(libs.androidx.room.testing)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

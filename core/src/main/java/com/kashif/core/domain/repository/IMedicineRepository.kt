@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface IMedicineRepository {
     suspend fun insertMedicines(medicines: List<Medicine>)
     fun getAllMedicines(): Flow<List<Medicine>>
-    suspend fun getMedicineById(id: Int): Medicine?
+    suspend fun getMedicineById(id: String): Medicine?
     suspend fun fetchMedicinesFromNetwork()
 }

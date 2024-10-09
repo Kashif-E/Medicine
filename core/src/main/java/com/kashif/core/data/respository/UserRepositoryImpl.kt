@@ -15,7 +15,7 @@ class UserRepositoryImpl(
         }
     }
 
-    override suspend fun getLoggedInUser(): Flow<User?> {
+    override fun getLoggedInUser(): Flow<User?> {
            return userDao.getLoggedInUser()
 
     }
