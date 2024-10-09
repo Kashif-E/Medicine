@@ -25,8 +25,7 @@ data class Diabetes(
 
 @Serializable
 data class Asthma(
-    val medications: List<Medication>? = null,
-    val labs: List<Lab>? = null
+    val medications: List<Medication>? = null
 )
 
 @Serializable
@@ -36,20 +35,17 @@ data class Medication(
 
 @Serializable
 data class MedicationsClass(
-    val className: List<ClassName>? = null,
-    val className2: List<ClassName>? = null
+    val data: List<DataItem>? = null
 )
 
 @Serializable
-data class ClassName(
-    val associatedDrug: List<AssociatedDrug>? = null,
-
-    @SerialName("associatedDrug#2")
-    val associatedDrug2: List<AssociatedDrug>? = null
+data class DataItem(
+    val associatedDrug: List<AssociatedDrug>? = null
 )
 
 @Serializable
 data class AssociatedDrug(
+    val id: String,
     val name: String,
     val dose: String,
     val strength: String

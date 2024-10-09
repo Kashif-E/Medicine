@@ -28,28 +28,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object CoreModule {
     private const val DATABASE_NAME = "medicine_database"
-    private const val BASE_URL = "https://run.mocky.io/v3/"
 
-    @Provides
-    @Singleton
-    fun provideRetrofit(): Retrofit {
-        val contentType = "application/json".toMediaType()
-        val json = Json { ignoreUnknownKeys = true }
-
-        val client = OkHttpClient.Builder().build()
-
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(client)
-            .addConverterFactory(json.asConverterFactory(contentType))
-            .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideMedicineApi(retrofit: Retrofit): MedicineApi {
-        return retrofit.create(MedicineApi::class.java)
-    }
     @Provides
     @Singleton
     fun provideMedicineDatabase(@ApplicationContext context: Context): MedicineDatabase {

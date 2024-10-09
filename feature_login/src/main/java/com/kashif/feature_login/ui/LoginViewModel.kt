@@ -15,7 +15,11 @@ class LoginViewModel @Inject constructor(
 
     fun fetchMedicines() {
         viewModelScope.launch {
+            try {
             fetchMedicinesUseCase()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

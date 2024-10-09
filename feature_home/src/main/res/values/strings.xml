@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="medicine_name">Name: %1$s</string>
+    <string name="medicine_dose">Dose: %1$s</string>
+    <string name="medicine_strength">Strength: %1$s</string>
+    <string name="medicine_details">Medicine Details %1$s</string>
+    <string name="medicine_name_heading">Medicine Name: %1$s</string>
+    <string name="medicine_dose_heading">Medicine Dose: %1$s</string>
+    <string name="medicine_strength_heading">Medicine Strength: %1$s</string>
+</resources>

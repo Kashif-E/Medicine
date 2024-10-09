@@ -22,19 +22,21 @@ class MedicineRepositoryImpl @Inject constructor(
     }
 
     override fun getAllMedicines(): Flow<List<Medicine>> {
-        return dao.getAllMedicines()
+           return dao.getAllMedicines()
     }
 
     override suspend fun getMedicineById(id: Int): Medicine? {
-        return dao.getMedicineById(id)
+        return withContext(Dispatchers.IO) {
+            dao.getMedicineById(id)
+        }
     }
 
-    override suspend fun fetchMedicinesFromNetwork(): List<Medicine> {
-        return withContext(Dispatchers.IO) {
-            val response = api.getMedicines()
+    override suspend fun fetchMedicinesFromNetwork() {
+        withContext(Dispatchers.IO) {
+            val response = api.getMedicines().first()
             val medicines = response.asDomainModel()
             dao.insertMedicines(medicines)
-            return@withContext medicines
+
         }
     }
 }

@@ -5,13 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "medicine_table")
 data class Medicine(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @PrimaryKey
+    val id: String,
     val name: String,
     val dose: String,
     val strength: String
 )
-
 
 fun MedicineResponse.asDomainModel(): List<Medicine> {
     return problems.flatMap { it.asDomainModel() }
@@ -19,10 +18,15 @@ fun MedicineResponse.asDomainModel(): List<Medicine> {
 
 fun Problem.asDomainModel(): List<Medicine> {
     val diabetesMedicines = diabetes.orEmpty().flatMap { it.asDomainModel() }
-    return diabetesMedicines
+    val asthmaMedicines = asthma.orEmpty().flatMap { it.asDomainModel() }
+    return diabetesMedicines + asthmaMedicines
 }
 
 fun Diabetes.asDomainModel(): List<Medicine> {
+    return medications.orEmpty().flatMap { it.asDomainModel() }
+}
+
+fun Asthma.asDomainModel(): List<Medicine> {
     return medications.orEmpty().flatMap { it.asDomainModel() }
 }
 
@@ -31,21 +35,19 @@ fun Medication.asDomainModel(): List<Medicine> {
 }
 
 fun MedicationsClass.asDomainModel(): List<Medicine> {
-    val classNameMedicines = className.orEmpty().flatMap { it.asDomainModel() }
-    val className2Medicines = className2.orEmpty().flatMap { it.asDomainModel() }
-    return classNameMedicines + className2Medicines
+    return data.orEmpty().flatMap { it.asDomainModel() }
 }
 
-fun ClassName.asDomainModel(): List<Medicine> {
-    val associatedDrugMedicines = associatedDrug.orEmpty().map { it.asDomainModel() }
-    val associatedDrug2Medicines = associatedDrug2.orEmpty().map { it.asDomainModel() }
-    return associatedDrugMedicines + associatedDrug2Medicines
+fun DataItem.asDomainModel(): List<Medicine> {
+    return associatedDrug.orEmpty().map { it.asDomainModel() }
 }
 
 fun AssociatedDrug.asDomainModel(): Medicine {
     return Medicine(
+        id = id,
         name = name,
         dose = dose,
         strength = strength
     )
 }
+
