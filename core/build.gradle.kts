@@ -49,20 +49,30 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    api(libs.androidx.room.ktx)
-    api(libs.androidx.room.runtime)
+
+
+    api(libs.coil.compose)
+    api(libs.androidx.hilt.navigation.compose)
+
+
+    api(libs.retrofit)
+    api(libs.retrofit2.kotlinx.serialization.converter)
     api(libs.kotlinx.serialization.json)
     implementation(libs.logging.interceptor)
-    api(libs.coil.compose)
-    api(libs.retrofit)
-    api(libs.androidx.hilt.navigation.compose)
-    api(libs.hilt.android)
-    api(libs.retrofit2.kotlinx.serialization.converter)
+
+
+    api(libs.androidx.room.ktx)
+    api(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
+
+
+    api(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     kspTest(libs.hilt.android.compiler)
     kspAndroidTest(libs.hilt.android.compiler)
+
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
