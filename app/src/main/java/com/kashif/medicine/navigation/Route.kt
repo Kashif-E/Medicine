@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 object Login
 
 @Serializable
-data class Home(val email: String = "")
+object Home
 
 @Serializable
 data class MedicineDetails(

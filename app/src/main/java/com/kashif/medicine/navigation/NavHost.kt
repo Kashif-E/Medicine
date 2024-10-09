@@ -3,32 +3,38 @@ package com.kashif.medicine.navigation
 import android.net.Uri
 import android.os.Bundle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.kashif.core.domain.model.Medicine
 import com.kashif.feature_home.ui.HomeScreen
 import com.kashif.feature_home.ui.MedicineDetailScreen
 import com.kashif.feature_login.ui.LoginScreen
+import com.kashif.medicine.MainViewModel
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlin.reflect.typeOf
 
 @Composable
-fun MedicineNavHost() {
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Login) {
+fun MedicineNavHost(mainViewModel: MainViewModel, navController: NavHostController) {
+
+    val isUserLoggedIn by mainViewModel.isUserLoggedIn.collectAsState()
+    NavHost(
+        navController = navController,
+        startDestination = if (isUserLoggedIn?.second == true) Home else Login
+    ) {
         composable<Login> {
-            LoginScreen { email ->
-                navController.navigate(Home(email))
+            LoginScreen {
+                navController.navigate(Home)
             }
         }
 
-        composable<Home> { backStackEntry ->
-            val email = backStackEntry.toRoute<Home>().email
-            HomeScreen(email = email, onNavigate = { medicine ->
+        composable<Home> {
+            HomeScreen(isUserLoggedIn?.first ?: "", onNavigate = { medicine ->
                 navController.navigate(
                     MedicineDetails(
                         id = medicine.id,

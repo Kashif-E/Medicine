@@ -3,9 +3,11 @@ package com.kashif.core.data.respository
 
 import com.kashif.core.data.local.MedicineDao
 import com.kashif.core.data.remote.MedicineApi
+import com.kashif.core.di.ioDispatcher
 import com.kashif.core.domain.model.Medicine
 import com.kashif.core.domain.model.asDomainModel
 import com.kashif.core.domain.repository.IMedicineRepository
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 class MedicineRepositoryImpl @Inject constructor(
     private val dao: MedicineDao,
-    private val api: MedicineApi
+    private val api: MedicineApi,
+    @ioDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : IMedicineRepository {
 
     override suspend fun insertMedicines(medicines: List<Medicine>) {
@@ -26,13 +29,13 @@ class MedicineRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMedicineById(id: Int): Medicine? {
-        return withContext(Dispatchers.IO) {
+        return withContext(ioDispatcher) {
             dao.getMedicineById(id)
         }
     }
 
     override suspend fun fetchMedicinesFromNetwork() {
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             val response = api.getMedicines().first()
             val medicines = response.asDomainModel()
             dao.insertMedicines(medicines)

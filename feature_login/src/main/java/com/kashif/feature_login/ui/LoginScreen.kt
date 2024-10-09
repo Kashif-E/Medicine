@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel(),
-    onNavigate: (email: String) -> Unit,
+    onNavigate: () -> Unit,
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -83,8 +83,8 @@ fun LoginScreen(
                             snackBarHostState.showSnackbar("Please enter email and password")
                         }
                     } else {
-                        viewModel.fetchMedicines()
-                        onNavigate(email)
+                        viewModel.login(email = email)
+                        onNavigate()
                     }
                 })
         }
