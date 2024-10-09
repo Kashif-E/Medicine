@@ -1,6 +1,12 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.androidRoom)
 }
 
 android {
@@ -40,13 +46,18 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    hilt {
+        enableAggregatingTask = false
+    }
+
+    room { schemaDirectory("$projectDir/schemas") }
 }
 
 dependencies {
@@ -54,11 +65,20 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+    api(projects.designSystem)
+    api(projects.featureLogin)
+    api(projects.core)
+
+    api(libs.androidx.hilt.navigation.compose)
+    api(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    kspTest(libs.hilt.android.compiler)
+    kspAndroidTest(libs.hilt.android.compiler)
+
+    api(libs.androidx.room.ktx)
+    api(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

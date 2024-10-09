@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.androidRoom)
+    
 }
 
 android {
@@ -13,7 +14,6 @@ android {
 
     defaultConfig {
         minSdk = 24
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -35,9 +35,6 @@ android {
         jvmTarget = "1.8"
     }
 
-    ksp {
-        arg("room.schemaLocation", "$projectDir/schemas")
-    }
     hilt {
         enableAggregatingTask = false
     }
@@ -45,15 +42,6 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-
-
-    api(libs.coil.compose)
-    api(libs.androidx.hilt.navigation.compose)
-
 
     api(libs.retrofit)
     api(libs.retrofit2.kotlinx.serialization.converter)
@@ -65,8 +53,9 @@ dependencies {
     api(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
 
-
+    api(libs.androidx.hilt.navigation.compose)
     api(libs.hilt.android)
+    api(libs.hilt.android.gradle.plugin)
     ksp(libs.hilt.android.compiler)
     kspTest(libs.hilt.android.compiler)
     kspAndroidTest(libs.hilt.android.compiler)

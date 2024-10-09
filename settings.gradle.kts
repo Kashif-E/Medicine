@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google {
@@ -22,3 +24,6 @@ dependencyResolutionManagement {
 rootProject.name = "Medicine"
 include(":app")
 include(":core")
+include(":feature_login")
+include(":design_system")
+include(":feature_home")

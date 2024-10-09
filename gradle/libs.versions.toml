@@ -1,6 +1,6 @@
 [versions]
 agp = "8.6.1"
-kotlin = "2.0.20"
+kotlin = "1.9.24"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -10,7 +10,7 @@ activityCompose = "1.9.2"
 composeBom = "2024.09.03"
 appcompat = "1.7.0"
 material = "1.12.0"
-coilCompose = "2.6.0"
+coilCompose = "2.7.0"
 hiltAndroid = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 kotlinxSerializationJson = "1.6.3"
@@ -18,8 +18,9 @@ retrofit2KotlinxSerializationConverter = "1.0.0"
 roomRuntime = "2.6.1"
 loggingInterceptor = "4.12.0"
 retrofit = "2.11.0"
-navigationCompose = "2.8.0-alpha07"
-ksp = "2.0.20-1.0.25"
+navigationCompose = "2.8.0"
+ksp = "1.9.24-1.0.20"
+uiTextGoogleFonts = "1.7.3"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -54,7 +55,9 @@ logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", ver
 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2KotlinxSerializationConverter" }
+androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 
 [plugins]
@@ -65,5 +68,4 @@ kotlinxSerialization = { id ="org.jetbrains.kotlin.plugin.serialization", versio
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 androidRoom = { id = "androidx.room", version.ref = "roomRuntime" }
 hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
-
-
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
